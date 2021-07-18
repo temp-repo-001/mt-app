@@ -42,3 +42,7 @@ class LogoutAPIView(generics.GenericAPIView):
         serializer.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def login(request):
+    return render(request, "login.html")

@@ -1,12 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-from django.db import models
-
-# Create your models here.
-# from auth_app.models import MetaModel
-
 
 class Invoice(models.Model):
     invoice_number = models.CharField(

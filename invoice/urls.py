@@ -20,4 +20,5 @@ urlpatterns = [
         views.StripeIntentView.as_view(),
         name="create-payment-intent",
     ),
+    path("home/", views.homepage, name="home-page"),
 ]

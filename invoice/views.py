@@ -1,8 +1,8 @@
 import json
-
 import stripe
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
@@ -116,3 +116,8 @@ class StripeIntentView(View):
             return JsonResponse({"clientSecret": intent["client_secret"]})
         except Exception as e:
             return JsonResponse({"error": str(e)})
+
+
+def homepage(request):
+    invoices = Invoice.objects.all()
+    return render(request, "home.html", context={"invoices": invoices})

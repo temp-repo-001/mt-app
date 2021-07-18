@@ -1,0 +1,58 @@
+<html>
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        var URL = "/api/login/";
+
+        function ownerLogin() {
+            $.ajax(
+                {
+                    "url": URL,
+                    "data": {
+                        "email": $("#email").val(),
+                        "username": $("#username").val(),
+                        "password": $("#password").val(),
+                    },
+                    "type": "POST",
+                    "success": login_success,
+                }
+            ); // ajax()
+        }
+
+        function login_success() {
+            window.location.href = "/api/home/"
+        }
+
+        function add_error() {
+            alert("Invalid input.");
+        }
+
+
+    </script>
+</head>
+<body>
+<div>
+    <h1>Login</h1>
+</div>
+
+<p/>
+Username <br/>
+<input type="text" id="username"/>
+
+<br/>
+Email <br/>
+<input type="email" id="email"/>
+<br/>
+Password <br/>
+<input type="password" id="password"/>
+<br/>
+
+<p/>
+
+<button onclick="ownerLogin()">Login</button>
+
+<p/>
+
+
+</body>
+</html>
