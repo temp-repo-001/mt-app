@@ -8,7 +8,7 @@ app_name = "authentication"
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("login/", LoginAPIView.as_view(), name="login"),
-    path("login-page/", login, name="login-page"),
+    path("", login, name="login-page"),
     path("logout/", LogoutAPIView.as_view(), name="logout"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
