@@ -24,13 +24,18 @@ Default database is provided with code
 
 ![01](https://user-images.githubusercontent.com/85641347/126066755-6aec97c7-d360-4b92-bea2-57f6d2194d13.PNG)
 Login Screen
+
 [02](https://user-images.githubusercontent.com/85641347/126066763-2a05cc73-5a6f-49e1-ac0d-2e9bff4f3528.PNG)
 Home Screen
+
 ![03](https://user-images.githubusercontent.com/85641347/126066771-84fed50c-aa1c-4dfb-a4e9-8de871d6ab54.PNG)
+
 Stripe payment page!
 [04](https://user-images.githubusercontent.com/85641347/126066784-3bf56110-adf3-4624-8eeb-870a7aed027a.PNG)
+
 ![05](https://user-images.githubusercontent.com/85641347/126066794-7c9d61db-fee8-4b4b-83d5-3a5d2ca07589.PNG)
-Transaction details from stripe!
+Transaction details from stripe
+
 [06](https://user-images.githubusercontent.com/85641347/126066802-42837fcb-5b08-4953-9df1-4acb89421527.PNG)
 Swagger UI
 
