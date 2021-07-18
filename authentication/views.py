@@ -10,6 +10,9 @@ from .serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
 
 
 class RegisterView(generics.GenericAPIView):
+    """
+    Register View
+    """
     serializer_class = RegisterSerializer
 
     def post(self, request):
@@ -22,6 +25,9 @@ class RegisterView(generics.GenericAPIView):
 
 
 class LoginAPIView(generics.GenericAPIView):
+    """
+    LoginAPI view
+    """
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
@@ -32,6 +38,9 @@ class LoginAPIView(generics.GenericAPIView):
 
 
 class LogoutAPIView(generics.GenericAPIView):
+    """
+    Logout APIView
+    """
     serializer_class = LogoutSerializer
 
     permission_classes = (permissions.IsAuthenticated,)
@@ -45,9 +54,15 @@ class LogoutAPIView(generics.GenericAPIView):
 
 
 def login(request):
+    """
+    Function to render the login page
+    """
     return render(request, "login.html")
 
 
 def logout(request):
+    """
+    Function to redirect to login page and execute logout
+    """
     auth.logout(request)
     return redirect("login-page")

@@ -21,6 +21,9 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class InvoicePage(TemplateView):
+    """
+    Invoice checkout page
+    """
     template_name = "landing.html"
 
     def get_context_data(self, **kwargs):
@@ -42,6 +45,9 @@ class CancelView(TemplateView):
 
 
 class InvoiceCreateListAPIView(ListCreateAPIView):
+    """
+    Invoice Create View
+    """
     permission_classes = [AllowAny]
     pagination_class = LimitOffsetPagination
     queryset = Invoice.objects.all()
@@ -71,6 +77,9 @@ class InvoiceCreateListAPIView(ListCreateAPIView):
 
 
 class CreateCheckoutSessionView(View):
+    """
+    Create checkout session for stripe
+    """
     def post(self, request, *args, **kwargs):
         invoice_id = self.kwargs["pk"]
         invoice = Invoice.objects.get(id=invoice_id)
@@ -99,6 +108,9 @@ class CreateCheckoutSessionView(View):
 
 @csrf_exempt
 def stripe_webhook(request):
+    """
+    stripe webhook
+    """
     payload = request.body
     sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     try:
@@ -113,6 +125,9 @@ def stripe_webhook(request):
 
 
 class StripeIntentView(View):
+    """
+    Stripe Intent View
+    """
     def post(self, request, *args, **kwargs):
         try:
             req_json = json.loads(request.body)
@@ -133,5 +148,8 @@ class StripeIntentView(View):
 
 
 def homepage(request):
+    """
+    Function to render homepage
+    """
     invoices = Invoice.objects.all()
     return render(request, "home.html", context={"invoices": invoices})
