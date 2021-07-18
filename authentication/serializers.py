@@ -1,8 +1,9 @@
-from rest_framework import serializers
-from .models import User
 from django.contrib import auth
+from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+
+from .models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -46,7 +47,7 @@ class LoginSerializer(serializers.ModelSerializer):
     def get_tokens(self, obj):
         user = User.objects.get(email=obj["email"])
 
-        return {"refresh": user.tokens()["refresh"], "access": user.tokens()["access"]}
+        return {"access": user.tokens()["access"]}
 
     class Meta:
         model = User

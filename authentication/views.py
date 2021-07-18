@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.contrib import auth
+from django.shortcuts import render, redirect
 
 # Create your views here.
-from rest_framework import generics, status, views, permissions
+from rest_framework import generics, permissions, status, views
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-
-from .serializers import RegisterSerializer, LogoutSerializer, LoginSerializer
 from .models import User
+from .serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
 
 
 class RegisterView(generics.GenericAPIView):
@@ -23,6 +24,7 @@ class RegisterView(generics.GenericAPIView):
 
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -41,3 +43,12 @@ class LogoutAPIView(generics.GenericAPIView):
         serializer.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def login(request):
+    return render(request, "login.html")
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("login-page")
