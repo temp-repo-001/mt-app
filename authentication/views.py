@@ -1,12 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import generics, status, views, permissions
+from rest_framework import generics, permissions, status, views
 from rest_framework.response import Response
 
-
-from .serializers import RegisterSerializer, LogoutSerializer, LoginSerializer
 from .models import User
+from .serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
 
 
 class RegisterView(generics.GenericAPIView):
