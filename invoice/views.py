@@ -8,10 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from django.views.generic import TemplateView
-from rest_framework import filters
+from rest_framework import filters, status
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
 
 from .models import Invoice
 from .serializers import InvoiceSerializer
@@ -41,7 +42,7 @@ class CancelView(TemplateView):
 
 
 class InvoiceCreateListAPIView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     pagination_class = LimitOffsetPagination
     queryset = Invoice.objects.all()
     filter_backends = [filters.SearchFilter]
@@ -54,6 +55,19 @@ class InvoiceCreateListAPIView(ListCreateAPIView):
         "project_name",
         "paid",
     ]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance = self.perform_create(serializer)
+        instance.add_url()
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
+
+    def perform_create(self, serializer):
+        return serializer.save()
 
 
 class CreateCheckoutSessionView(View):

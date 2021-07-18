@@ -19,8 +19,10 @@
             ); // ajax()
         }
 
-        function login_success() {
+        function login_success(data) {
             window.location.href = "/api/home/"
+            window.localStorage.setItem("token", data['tokens']['access']);
+
         }
 
         function add_error() {

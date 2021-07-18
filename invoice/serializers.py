@@ -17,6 +17,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
             "project_name",
             "amount",
             "paid",
+            "url",
         ]
         read_only_fields = ["id"]
 

@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import auth
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from rest_framework import generics, permissions, status, views
@@ -46,3 +47,8 @@ class LogoutAPIView(generics.GenericAPIView):
 
 def login(request):
     return render(request, "login.html")
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("login-page")

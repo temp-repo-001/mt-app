@@ -4,6 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Invoices</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        var URL = "/api/invoices/";
+        var token = "JWT " + localStorage.getItem('token')
+
+
+        function addInvoice(token) {
+            $.ajax(
+                {
+                    "url": URL,
+                    "data": {
+                        "invoice_number": $("#invoice_number").val(),
+                        "client_name": $("#client_name").val(),
+                        "client_email": $("#client_email").val(),
+                        "project_name": $("#project_name").val(),
+                        "amount": $("#amount").val(),
+                    },
+                    "headers": {"Authorization": token},
+                    "type": "POST",
+                    "success": add_success,
+
+                }
+            ); // ajax()
+        }
+
+        function add_success() {
+            window.location.href = "/api/home/"
+        }
+
+
+    </script>
 </head>
 <body>
 <table class="module"
@@ -39,6 +70,16 @@
             bgcolor="#f2f2f2">
             Project Name
         </td>
+        <td style="padding:10px 0px 10px 0px;text-align:center;vertical-align:middle;border-top-right-radius: 10px;"
+            role="module-content"
+            bgcolor="#f2f2f2">
+            URL
+        </td>
+        <td style="padding:10px 0px 10px 0px;text-align:center;vertical-align:middle;border-top-right-radius: 10px;"
+            role="module-content"
+            bgcolor="#f2f2f2">
+            Paid
+        </td>
     </tr>
     {% for invoice in invoices %}
         <tr>
@@ -63,8 +104,43 @@
                 bgcolor="">
                 {{ invoice.project_name }}
             </td>
+            <td style="padding:10px 0px 10px 0px;text-align:center;border: 1px solid #f2f2f2;vertical-align:middle;"
+                role="module-content"
+                bgcolor="">
+                {{ invoice.url }}
+            </td>
+            <td style="padding:10px 0px 10px 0px;text-align:center;border: 1px solid #f2f2f2;vertical-align:middle;"
+                role="module-content"
+                bgcolor="">
+                {% if invoice.paid %}
+                    Paid
+                {% else %}
+                    Not Paid
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 </table>
+<h1>Create Invoice</h1>
+<p/>
+Invoice Number <br/>
+<input type="text" id="invoice_number"/>
+<br/>
+Client Name <br/>
+<input type="text" id="client_name"/>
+<br/>
+Client Email <br/>
+<input type="text" id="client_email"/>
+<br/>
+Project Name <br/>
+<input type="text" id="project_name"/>
+<br/>
+Amount <br/>
+<input type="number" id="amount"/>
+<p/>
+
+<button onclick="addInvoice()">Create Invoice</button>
+
+<p/>
 </body>
 </html>
