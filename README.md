@@ -21,24 +21,12 @@ Default database is provided with code
 
 
 ## Screenshots
-
-![01](https://user-images.githubusercontent.com/85641347/126066755-6aec97c7-d360-4b92-bea2-57f6d2194d13.PNG)
-Login Screen
-
-[02](https://user-images.githubusercontent.com/85641347/126066763-2a05cc73-5a6f-49e1-ac0d-2e9bff4f3528.PNG)
-Home Screen
-
-![03](https://user-images.githubusercontent.com/85641347/126066771-84fed50c-aa1c-4dfb-a4e9-8de871d6ab54.PNG)
-
-Stripe payment page!
-[04](https://user-images.githubusercontent.com/85641347/126066784-3bf56110-adf3-4624-8eeb-870a7aed027a.PNG)
-
-![05](https://user-images.githubusercontent.com/85641347/126066794-7c9d61db-fee8-4b4b-83d5-3a5d2ca07589.PNG)
-Transaction details from stripe
-
-[06](https://user-images.githubusercontent.com/85641347/126066802-42837fcb-5b08-4953-9df1-4acb89421527.PNG)
-Swagger UI
-
+![01](https://user-images.githubusercontent.com/85641347/126066902-b803ef9a-b029-4cbf-af9d-43a5b8020aa0.PNG)
+![02](https://user-images.githubusercontent.com/85641347/126066906-701fd4a0-7a03-4c35-8525-7e050f8e0945.PNG)
+![03](https://user-images.githubusercontent.com/85641347/126066908-836dc5f0-0287-4e4b-aa43-67d3f0b632a5.PNG)
+![04](https://user-images.githubusercontent.com/85641347/126066910-115b2bbb-f2f5-449e-8ed3-d29e64028ff4.PNG)
+![05](https://user-images.githubusercontent.com/85641347/126066911-8d7d7238-872f-4137-89e3-00fcba05cc07.PNG)
+![06](https://user-images.githubusercontent.com/85641347/126066915-834cb1af-c451-4fc7-be36-b9f50c629752.PNG)
 
 
 
