@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "authentication",
     "drf_yasg",
+    "invoice",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -56,7 +59,7 @@ ROOT_URLCONF = "finance_app_mt.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates/"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -120,8 +123,42 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ),
+}
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=int(1)),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=int(1)),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": None,
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "AUTH_HEADER_TYPES": ("Bearer", "JWT"),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "JTI_CLAIM": "jti",
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": datetime.timedelta(minutes=10),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": datetime.timedelta(days=1),
+}
+
+STRIPE_SECRET_KEY = "sk_test_51JEIaMSIf5PyBBkcPX27HwcmzqtUIhRQskdl9K7TqQDq93GmNRm0NPQ1JUHhxmwZzrv0TH5bueeN4E5stBR47kpr00IvlMUbeN"
+STRIPE_PUBLIC_KEY = "pk_test_51JEIaMSIf5PyBBkcZRbS7wyAYZzgdcurUzt18El61g7ivD7LyNrKflVkAN9ZIASTajsfvfLBDhOefrcKH543FJHT00OJJxPPFQ"
+STRIPE_WEBHOOK_SECRET = "whsec_QEtujg2PlGhBOZHjXHcXsR9BsEOjcTNE"

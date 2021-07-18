@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import generics, permissions, status, views
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import User
@@ -22,6 +23,7 @@ class RegisterView(generics.GenericAPIView):
 
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
